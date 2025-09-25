@@ -7,7 +7,7 @@
       </head>
       <body>
         <h1>Design your taco!</h1>
-        <img th:src="@{images/taco-cloud.webp}">
+        <img th:src="@{/images/taco-cloud.webp}"/>
 
 
         <form method="POST" th:object="${taco}">
@@ -50,7 +50,7 @@
                   </div>
                 </div>
             </div>
-          </div>
+
           <div>
               <span class="validationError"
                     th:if="${#fields.hasErrors('ingredients')}"

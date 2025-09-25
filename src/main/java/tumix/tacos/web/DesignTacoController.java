@@ -1,6 +1,5 @@
-package tumix.taco_cloud;
+package tumix.tacos.web;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
-import tumix.taco_cloud.Ingredient;
-import tumix.taco_cloud.Ingredient.Type;
-import tumix.taco_cloud.Taco;
-import org.springframework.web.bind.annotation.RequestBody;
+import tumix.tacos.Ingredient;
+import tumix.tacos.Ingredient.Type;
+import tumix.tacos.data.IngredientRepository;
+import tumix.tacos.Taco;
+import tumix.tacos.TacoOrder;
 
 
 @Slf4j
@@ -27,24 +27,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
  
+    private final IngredientRepository ingredientRepo;
+
+    public DesignTacoController(IngredientRepository ingredientRepo){
+        this.ingredientRepo = ingredientRepo;
+    }
+
     @ModelAttribute
     public void addIngredientsToModel(Model model) {
-        List<Ingredient> ingredients = Arrays.asList(
-            new Ingredient("FLTO", "Flour Tortilla", Type.WRAP),
-            new Ingredient("COTO", "Corn Tortilla", Type.WRAP),
-            new Ingredient("GRBF", "Ground beef", Type.PROTEIN),
-            new Ingredient("CARN", "Carnitas", Type.PROTEIN),
-            new Ingredient("TMTO", "Diced Tomatoes", Type.VEGGIES),
-            new Ingredient("LETC", "Lettuce", Type.VEGGIES),
-            new Ingredient("CHED", "Cheddar", Type.CHEESE),
-            new Ingredient("JACK", "Monterrey Jack", Type.CHEESE),
-            new Ingredient("SLSA", "Salsa", Type.SAUCE),
-            new Ingredient("SRCR", "Sour Cream", Type.SAUCE)
-        );
-
+        Iterable<Ingredient> ingredients = ingredientRepo.findAll();
         Type[] types = Ingredient.Type.values();
         for (Type type : types){
-            model.addAttribute(type.toString().toLowerCase(), filterByType(ingredients, type));
+            model.addAttribute(type.toString().toLowerCase(), filterByType((List<Ingredient>) ingredients, type));
         }
     }
 
@@ -60,7 +54,7 @@ public class DesignTacoController {
 
     @GetMapping
     public String showDesignForm(Model model) {
-        // System.out.println("Model attributes: " + model.asMap());
+        // System.out.println("Model attributes: " + model.asMap());z
         return "design";
     }
 
@@ -72,7 +66,7 @@ public class DesignTacoController {
         }
 
         tacoOrder.addTaco(taco);
-        log.info("Processing taco: {}", taco);
+        log.info("Processing tacos: {}", taco);
         
         return "redirect:/orders/current";
     }

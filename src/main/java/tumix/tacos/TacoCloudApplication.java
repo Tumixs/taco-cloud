@@ -1,4 +1,4 @@
-package tumix.taco_cloud;
+package tumix.tacos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

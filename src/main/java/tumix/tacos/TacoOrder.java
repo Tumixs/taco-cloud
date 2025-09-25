@@ -1,5 +1,7 @@
-package tumix.taco_cloud;
+package tumix.tacos;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -10,7 +12,11 @@ import lombok.Data;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 @Data
-public class TacoOrder {
+public class TacoOrder implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+    private Long id;
+    private Date placedAt;
 
     @NotBlank(message="Delivery name is required")
     private String deliveryName;

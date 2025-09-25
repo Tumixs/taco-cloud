@@ -1,4 +1,4 @@
-package tumix.taco_cloud;
+package tumix.tacos;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

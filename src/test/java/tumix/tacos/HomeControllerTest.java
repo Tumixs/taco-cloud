@@ -1,4 +1,4 @@
-package tumix.taco_cloud;
+package tumix.tacos;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

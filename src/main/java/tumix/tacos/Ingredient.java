@@ -1,4 +1,4 @@
-package tumix.taco_cloud;
+package tumix.tacos;
 
 import lombok.Data;
 
