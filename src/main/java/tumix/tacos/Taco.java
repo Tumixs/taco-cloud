@@ -7,10 +7,16 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
 @Data
+@Table
 public class Taco {
 
+    @Id
     private Long id;
+    
     private Date createdAt = new Date();
 
     @NotNull
@@ -21,8 +27,8 @@ public class Taco {
     @Size(min=1, message="You must choose at least 1 ingredient")
     private List<IngredientRef> ingredients;
 
-    public void addIngredient(Ingredient taco){
-        this.ingredients.add(new IngredientRef(taco.getId()));
+    public void addIngredient(Ingredient ingredient){
+        this.ingredients.add(new IngredientRef(ingredient.getId()));
     }
 
 }

@@ -1,12 +1,13 @@
 package tumix.tacos.data;
 
 import tumix.tacos.Ingredient;
-import java.util.Optional;
-// import org.springframework.data
+// import java.util.Optional;
+
+import org.springframework.data.repository.CrudRepository;
 
 
-public interface IngredientRepository{
-    Iterable<Ingredient> findAll();
-    Optional<Ingredient> findById(String id);
-    Ingredient save(Ingredient ingredient);
+public interface IngredientRepository extends CrudRepository<Ingredient, String>{
+    // Iterable<Ingredient> findAll();
+    // Optional<Ingredient> findById(String id);
+    // Ingredient save(Ingredient ingredient);
 }
